@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "build": "bun run build:all",
+    "build:all": "pnpm -r run build"
+  }
+}
