@@ -1,6 +1,28 @@
 {
+  "name": "your-project",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.23",
+    "tailwindcss": "^3.3.2",
+    "typescript": "^5.5.4"
+  },
   "scripts": {
-    "build": "bun run build:all",
-    "build:all": "pnpm -r run build"
+    "start": "pnpm run --filter calculator-basic start",
+    "build": "bun run build:css && bun run build:dev && bun run build:prod",
+    "build:css": "tailwindcss -i ./packages/calculator-basic/src/tailwind.css -o ./packages/calculator-basic/dist/tailwind.css",
+    "build:dev": "bun build packages/calculator-basic/src/index.tsx --outdir=packages/calculator-basic/dist --target=browser",
+    "build:prod": "bun build packages/calculator-basic/src/index.tsx --outdir=packages/calculator-basic/dist --target=browser --minify",
+    "test": "pnpm run --filter calculator-basic test"
   }
 }

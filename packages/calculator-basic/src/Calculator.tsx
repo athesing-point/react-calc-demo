@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
 
 export const Calculator: React.FC = () => {
   const [loanType, setLoanType] = useState("personal");
@@ -49,12 +51,12 @@ export const Calculator: React.FC = () => {
           <div>
             <label className="block text-sm font-medium text-[#6E7C87] mb-2">Loan type</label>
             <div className="flex space-x-2">
-              <button onClick={() => setLoanType("personal")} className={`flex-1 py-3 text-sm font-medium rounded-md transition-colors ${loanType === "personal" ? "bg-[#0055FF] text-white" : "bg-white text-[#6E7C87] hover:bg-[#F7F9FC]"}`}>
+              <Button onClick={() => setLoanType("personal")} active={loanType === "personal"}>
                 Personal loan
-              </button>
-              <button onClick={() => setLoanType("heloc")} className={`flex-1 py-3 text-sm font-medium rounded-md transition-colors ${loanType === "heloc" ? "bg-[#0055FF] text-white" : "bg-white text-[#6E7C87] hover:bg-[#F7F9FC]"}`}>
+              </Button>
+              <Button onClick={() => setLoanType("heloc")} active={loanType === "heloc"}>
                 HELOC
-              </button>
+              </Button>
             </div>
           </div>
           <div>
@@ -72,30 +74,16 @@ export const Calculator: React.FC = () => {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#6E7C87] mb-2">Loan amount</label>
-            <div className="flex items-center space-x-4">
-              <input type="text" value={formatNumber(loanAmount)} onChange={handleLoanAmountChange} className="w-1/2 p-3 text-sm border border-[#6E7C87] rounded-md focus:outline-none focus:ring-2 focus:ring-[#0055FF] bg-white text-[#1A1A1A]" />
-              <input type="range" min="1000" max="100000" step="1000" value={loanAmount} onChange={(e) => setLoanAmount(Number(e.target.value))} className="w-1/2 h-2 bg-[#6E7C87] rounded-lg appearance-none cursor-pointer" />
-            </div>
+            <Input label="Loan amount" value={formatNumber(loanAmount)} onChange={handleLoanAmountChange} />
+            <input type="range" min="1000" max="100000" step="1000" value={loanAmount} onChange={(e) => setLoanAmount(Number(e.target.value))} className="w-1/2 h-2 bg-[#6E7C87] rounded-lg appearance-none cursor-pointer" />
             <div className="flex justify-between mt-2">
               <span className="text-xs text-[#6E7C87]">$1,000</span>
               <span className="text-xs text-[#6E7C87]">$100,000</span>
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#6E7C87] mb-2">Interest rate</label>
-            <div className="flex items-center space-x-4">
-              <input
-                type="number"
-                value={interestRate}
-                onChange={handleInterestRateChange}
-                step="0.1"
-                min="1"
-                max="20"
-                className="w-1/2 p-3 text-sm border border-[#6E7C87] rounded-md focus:outline-none focus:ring-2 focus:ring-[#0055FF] bg-white text-[#1A1A1A]"
-              />
-              <input type="range" min="1" max="20" step="0.1" value={interestRate} onChange={(e) => setInterestRate(Number(e.target.value))} className="w-1/2 h-2 bg-[#6E7C87] rounded-lg appearance-none cursor-pointer" />
-            </div>
+            <Input label="Interest rate" value={interestRate} onChange={handleInterestRateChange} type="number" min={1} max={20} step={0.1} />
+            <input type="range" min="1" max="20" step="0.1" value={interestRate} onChange={(e) => setInterestRate(Number(e.target.value))} className="w-1/2 h-2 bg-[#6E7C87] rounded-lg appearance-none cursor-pointer" />
             <div className="flex justify-between mt-2">
               <span className="text-xs text-[#6E7C87]">1%</span>
               <span className="text-xs text-[#6E7C87]">20%</span>
